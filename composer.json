@@ -1,0 +1,19 @@
+{
+    "name": "vsga/kalkulator_siakad",
+    "description": "CRUD Guru dan Murid, serta kalkulator untuk murid di tiap kelas.",
+    "type": "project",
+    "require": {
+        "twbs/bootstrap": "3.3.7",
+        "fortawesome/font-awesome": "^5.15"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "musfirotus",
+            "email": "musfirotus@gmail.com"
+        }
+    ],
+    "scripts": {
+        "gensass": "sass --watch resources/assets/sass/app.scss resources/assets/css/styles.css"
+    }
+}
