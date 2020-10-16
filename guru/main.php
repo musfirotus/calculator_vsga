@@ -63,7 +63,7 @@ require_once('../functions/add.php');
                                     echo "<tr>
                                       <td>".$no++."</td>
                                       <td><a href='#update_guru' class='btn btn-warning' data-toggle='modal' onclick='guru_detail(".$data["id_guru"].")'><i class='fas fa-edit'></i></a> | 
-                                      <a href='' class='btn btn-danger' onclick='return confirm(\"Yakin mau dihapus?\")'><i class='fas fa-trash-alt'></i></a></td>
+                                      <a href='hapus.php?id=".$data["id_user"]."' class='btn btn-danger' onclick='return confirm(\"Yakin mau dihapus?\")'><i class='fas fa-trash-alt'></i></a></td>
                                       <td>".$data['nama_guru']."</td>
                                       <td>".$data['username']."</td>
                                     </tr>";
@@ -101,7 +101,7 @@ require_once('../functions/add.php');
                                     echo "<tr>
                                       <td>".$no++."</td>
                                       <td><a href='#update_murid' class='btn btn-warning' data-toggle='modal' onclick='murid_detail(".$data["id_murid"].")'><i class='fas fa-edit'></i></a> | 
-                                      <a href='' class='btn btn-danger' onclick='return confirm(\"Yakin mau dihapus?\")'><i class='fas fa-trash-alt'></i></a></td>
+                                      <a href='hapus.php?id=".$data["id_user"]."' class='btn btn-danger' onclick='return confirm(\"Yakin mau dihapus?\")'><i class='fas fa-trash-alt'></i></a></td>
                                       <td>".$data['nama_murid']."</td>
                                       <td>".$data['kelas']."</td>
                                       <td>".$data['username']."</td>

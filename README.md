@@ -23,11 +23,11 @@
 | :one:   | Read Data Guru    | :heavy_check_mark: |
 | :two:   | Create Data Guru  | :heavy_check_mark: |
 | :three: | Update Data Guru  | :x: |
-| :four:  | Delete Data Guru  | :x: |
+| :four:  | Delete Data Guru  | :heavy_check_mark: |
 | :five:  | Read Data Murid   | :heavy_check_mark: |
 | :six:   | Create Data Murid | :heavy_check_mark: |
 | :seven: | Update Data Murid | :x: |
-| :eight: | Delete Data Murid | :x: |
+| :eight: | Delete Data Murid | :heavy_check_mark: |
 | :nine:  | Assign Class      | :x: |
 | :ten:   | Profile           | :x: |
 
