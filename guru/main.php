@@ -1,5 +1,6 @@
 <?php
-include('../koneksi.php');
+require('../koneksi.php');
+require('fungsi.php');
 $result_guru = mysqli_query($db, "SELECT * FROM guru INNER JOIN user ON guru.id_user = user.id_user INNER JOIN level ON user.id_level = level.id_level WHERE level.level = 1");
 $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid.id_kelas = kelas.id_kelas INNER JOIN user ON murid.id_user = user.id_user INNER JOIN level ON user.id_level = level.id_level WHERE level.id_level = 2");
 ?>
@@ -38,13 +39,15 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
             </div>
         </nav>
         <!-- Page Content-->
-        <div class="container-fluid p-0">
+        <div class="container">
             <!-- Guru-->
             <section class="resume-section" id="guru">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Data Guru</h2>
+                    <h2 class="mb-3">Data Guru</h2>
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
+                            <a href="#tambah_guru" class="btn btn-info" data-toggle="modal"><i class="far fa-plus-square"></i> Tambah</a>
+                            <br><br>
                             <table class="table table-hover table-striped">
                               <thead>
                                 <tr>
@@ -52,7 +55,6 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
                                   <th>Aksi</th>
                                   <th>Nama Guru</th>
                                   <th>Username</th>
-                                  <th>Password</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -61,10 +63,10 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
                                   foreach($result_guru as $data){
                                     echo "<tr>
                                       <td>".$no++."</td>
-                                      <td>Edit | Hapus</td>
+                                      <td><a href='#update_guru' class='btn btn-warning' data-toggle='modal' onclick='guru_detail(".$data["id_guru"].")'><i class='fas fa-edit'></i></a> | 
+                                      <a href='' class='btn btn-danger' onclick='return confirm(\"Yakin mau dihapus?\")'><i class='fas fa-trash-alt'></i></a></td>
                                       <td>".$data['nama_guru']."</td>
                                       <td>".$data['username']."</td>
-                                      <td>".$data['password']."</td>
                                     </tr>";
                                   }
                                 ?>
@@ -78,9 +80,11 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
             <!-- Data Murid-->
             <section class="resume-section" id="murid">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Data Murid</h2>
+                    <h2 class="mb-3">Data Murid</h2>
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
+                            <a href="#tambah_murid" class="btn btn-info" data-toggle="modal"><i class="far fa-plus-square"></i> Tambah</a>
+                            <br><br>
                             <table class="table table-hover table-striped">
                               <thead>
                                 <tr>
@@ -89,7 +93,6 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
                                   <th>Nama Murid</th>
                                   <th>Kelas</th>
                                   <th>Username</th>
-                                  <th>Password</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -98,11 +101,11 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
                                   foreach($result_murid as $data){
                                     echo "<tr>
                                       <td>".$no++."</td>
-                                      <td>Edit | Hapus</td>
+                                      <td><a href='#update_murid' class='btn btn-warning' data-toggle='modal' onclick='murid_detail(".$data["id_murid"].")'><i class='fas fa-edit'></i></a> | 
+                                      <a href='' class='btn btn-danger' onclick='return confirm(\"Yakin mau dihapus?\")'><i class='fas fa-trash-alt'></i></a></td>
                                       <td>".$data['nama_murid']."</td>
                                       <td>".$data['kelas']."</td>
                                       <td>".$data['username']."</td>
-                                      <td>".$data['password']."</td>
                                     </tr>";
                                   }
                                 ?>
@@ -174,7 +177,102 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
                     </div>
                 </div>
             </section>
+
+            <div class="modal fade" id="tambah_guru">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Tambah Data Guru</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post" action="" enctype="multipart/form-data">
+                      <label for="tnama_guru">Nama Guru</label><br>
+                      <input class="form-control" type="text" name="nama_guru" id="tnama_guru" required><br>
+                      <label for="tusername">Username</label><br>
+                      <input class="form-control" type="text" name="username" id="tusername" required><br>
+                      <label for="tpassword">Password</label><br>
+                      <input class="form-control" type="password" name="password" id="tpassword" required><br>
+                      <button type="submit" name="simpan" class="btn btn-success"><i class="far fa-save"></i></button> 
+                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="tambah_murid">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Tambah Data Murid</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post" action="" enctype="multipart/form-data">
+                      <label for="tnama_murid">Nama Murid</label><br>
+                      <input class="form-control" type="text" name="nama_murid" id="tnama_murid" required><br>
+                      <label for="tusername">Username</label><br>
+                      <input class="form-control" type="text" name="username" id="tusername" required><br>
+                      <label for="tpassword">Password</label><br>
+                      <input class="form-control" type="password" name="password" id="tpassword" required><br>
+                      <button type="submit" name="simpan" class="btn btn-success"><i class="far fa-save"></i></button> 
+                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="update_guru">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Update Data Guru</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post" action="" enctype="multipart/form-data">
+                      <input type="hidden" name="id_guru" id="nama_guru">
+                      <label for="nama_guru">Nama Guru</label><br>
+                      <input class="form-control" type="text" name="nama_guru" id="nama_guru" required><br>
+                      <label for="username">Username</label><br>
+                      <input class="form-control" type="text" name="username" id="username" required><br>
+                      <label for="password">Password</label><br>
+                      <input class="form-control" type="password" name="password" id="password" required><br>
+                      <button type="submit" name="simpan" class="btn btn-success"><i class="far fa-save"></i></button> 
+                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="update_murid">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Update Data Murid</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post" action="" enctype="multipart/form-data">
+                      <input type="hidden" name="id_murid" id="nama_murid">
+                      <label for="nama_murid">Nama Murid</label><br>
+                      <input class="form-control" type="text" name="nama_murid" id="nama_murid" required><br>
+                      <label for="username">Username</label><br>
+                      <input class="form-control" type="text" name="username" id="username" required><br>
+                      <label for="password">Password</label><br>
+                      <input class="form-control" type="password" name="password" id="password" required><br>
+                      <button type="submit" name="simpan" class="btn btn-success"><i class="far fa-save"></i></button> 
+                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
