@@ -1,34 +1,7 @@
 <?php
 require('../koneksi.php');
-
-$result_guru = mysqli_query($db, "SELECT * FROM guru INNER JOIN user ON guru.id_user = user.id_user INNER JOIN level ON user.id_level = level.id_level WHERE level.level = 1");
-$result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid.id_kelas = kelas.id_kelas INNER JOIN user ON murid.id_user = user.id_user INNER JOIN level ON user.id_level = level.id_level WHERE level.id_level = 2");
-
-if (isset($_POST["add_guru"])) {
-  $tnama_guru = $_POST["tnama_guru"];
-  $tgusername = $_POST["tgusername"];
-  $tgpassword = $_POST["tgpassword"];
-
-  foreach($result_guru as $dt) {
-    if ($tgusername == $dt['username']) {
-      echo "<script type='text/javascript'>alert('Username already exist.')</script>";
-    } elseif($tgusername != $dt['username']) {
-      $add_tbuserguru = "INSERT INTO user(username,password,id_level) VALUES ('$tgusername','$tgpassword',1)";
-      mysqli_query($db, $add_tbuserguru);
-
-      $find = "SELECT * FROM user WHERE user.username = '$tgusername'";
-      $result_find = mysqli_query($db, $find);
-
-      foreach($result_find as $dt) {
-        $iduser = $dt['id_user'];
-        $add_tbguru = "INSERT INTO guru(id_user,nama_guru) VALUES ('$iduser','$tnama_guru')";
-        mysqli_query($db, $add_tbguru);
-      }
-
-      header("Refresh:0;");
-    }
-  }
-}
+require('../functions/get.php');
+require('../functions/add.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -167,53 +140,9 @@ if (isset($_POST["add_guru"])) {
 
             <?= require('add_murid.php'); ?>
 
-            <div class="modal fade" id="update_guru">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Update Data Guru</h4>
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
-                  </div>
-                  <div class="modal-body">
-                    <form method="post" action="" enctype="multipart/form-data">
-                      <input type="hidden" name="id_guru" id="id_guru">
-                      <label for="upnama_guru">Nama Guru</label><br>
-                      <input class="form-control" type="text" name="upnama_guru" id="upnama_guru" required><br>
-                      <label for="upusername">Username</label><br>
-                      <input class="form-control" type="text" name="upusername" id="upusername" required><br>
-                      <label for="uppassword">Password</label><br>
-                      <input class="form-control" type="password" name="uppassword" id="uppassword" required><br>
-                      <button type="submit" name="simpan" class="btn btn-success"><i class="far fa-save"></i></button> 
-                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <?= require('update_guru.php'); ?>
 
-            <div class="modal fade" id="update_murid">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Update Data Murid</h4>
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
-                  </div>
-                  <div class="modal-body">
-                    <form method="post" action="" enctype="multipart/form-data">
-                      <input type="hidden" name="id_murid" id="id_murid">
-                      <label for="upnama_murid">Nama Murid</label><br>
-                      <input class="form-control" type="text" name="upnama_murid" id="upnama_murid" required><br>
-                      <label for="upusername">Username</label><br>
-                      <input class="form-control" type="text" name="upusername" id="upusername" required><br>
-                      <label for="uppassword">Password</label><br>
-                      <input class="form-control" type="password" name="uppassword" id="uppassword" required><br>
-                      <button type="submit" name="simpan" class="btn btn-success"><i class="far fa-save"></i></button> 
-                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <?= require('update_murid.php'); ?>
         </div>
 
         <!-- Bootstrap core JS-->
