@@ -1,8 +1,34 @@
 <?php
 require('../koneksi.php');
-require('fungsi.php');
+
 $result_guru = mysqli_query($db, "SELECT * FROM guru INNER JOIN user ON guru.id_user = user.id_user INNER JOIN level ON user.id_level = level.id_level WHERE level.level = 1");
 $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid.id_kelas = kelas.id_kelas INNER JOIN user ON murid.id_user = user.id_user INNER JOIN level ON user.id_level = level.id_level WHERE level.id_level = 2");
+
+if (isset($_POST["add_guru"])) {
+  $tnama_guru = $_POST["tnama_guru"];
+  $tgusername = $_POST["tgusername"];
+  $tgpassword = $_POST["tgpassword"];
+
+  foreach($result_guru as $dt) {
+    if ($tgusername == $dt['username']) {
+      echo "<script type='text/javascript'>alert('Username already exist.')</script>";
+    } elseif($tgusername != $dt['username']) {
+      $add_tbuserguru = "INSERT INTO user(username,password,id_level) VALUES ('$tgusername','$tgpassword',1)";
+      mysqli_query($db, $add_tbuserguru);
+
+      $find = "SELECT * FROM user WHERE user.username = '$tgusername'";
+      $result_find = mysqli_query($db, $find);
+
+      foreach($result_find as $dt) {
+        $iduser = $dt['id_user'];
+        $add_tbguru = "INSERT INTO guru(id_user,nama_guru) VALUES ('$iduser','$tnama_guru')";
+        mysqli_query($db, $add_tbguru);
+      }
+
+      header("Refresh:0;");
+    }
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +38,7 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>VSGA 2020 - Guru - Kalkulator</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="../resources/assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -116,47 +142,6 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
                 </div>
             </section>
             <hr class="m-0" />
-            <!-- Skills-->
-            <section class="resume-section" id="skills">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Skills</h2>
-                    <div class="subheading mb-3">Programming Languages & Tools</div>
-                    <ul class="list-inline dev-icons">
-                        <li class="list-inline-item"><i class="fab fa-html5"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-css3-alt"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-js-square"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-angular"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-react"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-node-js"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-sass"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-less"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-wordpress"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-gulp"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-grunt"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-npm"></i></li>
-                    </ul>
-                    <div class="subheading mb-3">Workflow</div>
-                    <ul class="fa-ul mb-0">
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            Mobile-First, Responsive Design
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            Cross Browser Testing & Debugging
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            Cross Functional Teams
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            Agile Development & Scrum
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            <hr class="m-0" />
             <!-- About-->
             <section class="resume-section" id="about">
                 <div class="resume-section-content">
@@ -178,51 +163,9 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
                 </div>
             </section>
 
-            <div class="modal fade" id="tambah_guru">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Guru</h4>
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
-                  </div>
-                  <div class="modal-body">
-                    <form method="post" action="" enctype="multipart/form-data">
-                      <label for="tnama_guru">Nama Guru</label><br>
-                      <input class="form-control" type="text" name="nama_guru" id="tnama_guru" required><br>
-                      <label for="tusername">Username</label><br>
-                      <input class="form-control" type="text" name="username" id="tusername" required><br>
-                      <label for="tpassword">Password</label><br>
-                      <input class="form-control" type="password" name="password" id="tpassword" required><br>
-                      <button type="submit" name="simpan" class="btn btn-success"><i class="far fa-save"></i></button> 
-                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <?= require('add_guru.php'); ?>
 
-            <div class="modal fade" id="tambah_murid">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Murid</h4>
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
-                  </div>
-                  <div class="modal-body">
-                    <form method="post" action="" enctype="multipart/form-data">
-                      <label for="tnama_murid">Nama Murid</label><br>
-                      <input class="form-control" type="text" name="nama_murid" id="tnama_murid" required><br>
-                      <label for="tusername">Username</label><br>
-                      <input class="form-control" type="text" name="username" id="tusername" required><br>
-                      <label for="tpassword">Password</label><br>
-                      <input class="form-control" type="password" name="password" id="tpassword" required><br>
-                      <button type="submit" name="simpan" class="btn btn-success"><i class="far fa-save"></i></button> 
-                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <?= require('add_murid.php'); ?>
 
             <div class="modal fade" id="update_guru">
               <div class="modal-dialog">
@@ -233,13 +176,13 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
                   </div>
                   <div class="modal-body">
                     <form method="post" action="" enctype="multipart/form-data">
-                      <input type="hidden" name="id_guru" id="nama_guru">
-                      <label for="nama_guru">Nama Guru</label><br>
-                      <input class="form-control" type="text" name="nama_guru" id="nama_guru" required><br>
-                      <label for="username">Username</label><br>
-                      <input class="form-control" type="text" name="username" id="username" required><br>
-                      <label for="password">Password</label><br>
-                      <input class="form-control" type="password" name="password" id="password" required><br>
+                      <input type="hidden" name="id_guru" id="id_guru">
+                      <label for="upnama_guru">Nama Guru</label><br>
+                      <input class="form-control" type="text" name="upnama_guru" id="upnama_guru" required><br>
+                      <label for="upusername">Username</label><br>
+                      <input class="form-control" type="text" name="upusername" id="upusername" required><br>
+                      <label for="uppassword">Password</label><br>
+                      <input class="form-control" type="password" name="uppassword" id="uppassword" required><br>
                       <button type="submit" name="simpan" class="btn btn-success"><i class="far fa-save"></i></button> 
                       <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
                     </form>
@@ -257,13 +200,13 @@ $result_murid = mysqli_query($db, "SELECT * FROM murid INNER JOIN kelas ON murid
                   </div>
                   <div class="modal-body">
                     <form method="post" action="" enctype="multipart/form-data">
-                      <input type="hidden" name="id_murid" id="nama_murid">
-                      <label for="nama_murid">Nama Murid</label><br>
-                      <input class="form-control" type="text" name="nama_murid" id="nama_murid" required><br>
-                      <label for="username">Username</label><br>
-                      <input class="form-control" type="text" name="username" id="username" required><br>
-                      <label for="password">Password</label><br>
-                      <input class="form-control" type="password" name="password" id="password" required><br>
+                      <input type="hidden" name="id_murid" id="id_murid">
+                      <label for="upnama_murid">Nama Murid</label><br>
+                      <input class="form-control" type="text" name="upnama_murid" id="upnama_murid" required><br>
+                      <label for="upusername">Username</label><br>
+                      <input class="form-control" type="text" name="upusername" id="upusername" required><br>
+                      <label for="uppassword">Password</label><br>
+                      <input class="form-control" type="password" name="uppassword" id="uppassword" required><br>
                       <button type="submit" name="simpan" class="btn btn-success"><i class="far fa-save"></i></button> 
                       <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
                     </form>
