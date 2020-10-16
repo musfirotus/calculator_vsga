@@ -1,7 +1,7 @@
 <?php
 require('../koneksi.php');
-require('../functions/get.php');
-require('../functions/add.php');
+require_once('../functions/get.php');
+require_once('../functions/add.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -136,13 +136,13 @@ require('../functions/add.php');
                 </div>
             </section>
 
-            <?= require('add_guru.php'); ?>
+            <?= require_once('add_guru.php'); ?>
 
-            <?= require('add_murid.php'); ?>
+            <?= require_once('add_murid.php'); ?>
 
-            <?= require('update_guru.php'); ?>
+            <?= require_once('update_guru.php'); ?>
 
-            <?= require('update_murid.php'); ?>
+            <?= require_once('update_murid.php'); ?>
         </div>
 
         <!-- Bootstrap core JS-->

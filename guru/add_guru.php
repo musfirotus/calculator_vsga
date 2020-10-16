@@ -21,3 +21,24 @@
     </div>
   </div>
 </div>
+<?php
+require_once('../functions/add.php');
+
+if (isset($_POST["add_guru"])) {
+  if (new_guru($_POST) > 0) {
+    echo "
+      <script>
+        alert('Berhasil tambah data guru');
+        document.location.href = 'main.php';
+      </script>
+    ";
+  } else {
+    echo "
+      <script>
+        alert('Gagal tambah data guru');
+        document.location.href = 'main.php';
+      </script>
+    ";
+  }
+}
+?>

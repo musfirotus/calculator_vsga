@@ -1,10 +1,14 @@
 <?php
 require('../koneksi.php');
-require('get.php');
-if (isset($_POST["add_guru"])) {
-  $tnama_guru = $_POST["tnama_guru"];
-  $tgusername = $_POST["tgusername"];
-  $tgpassword = $_POST["tgpassword"];
+require_once('get.php');
+
+function new_guru($data){
+  global $db;
+  global $result_guru;
+
+  $tnama_guru = $data["tnama_guru"];
+  $tgusername = $data["tgusername"];
+  $tgpassword = $data["tgpassword"];
 
   foreach($result_guru as $dt) {
     if ($tgusername == $dt['username']) {
@@ -20,9 +24,9 @@ if (isset($_POST["add_guru"])) {
         $iduser = $dt['id_user'];
         $add_tbguru = "INSERT INTO guru(id_user,nama_guru) VALUES ('$iduser','$tnama_guru')";
         mysqli_query($db, $add_tbguru);
+        
+        return mysqli_affected_rows($db);
       }
-
-      header("Refresh:0;");
     }
   }
 }
