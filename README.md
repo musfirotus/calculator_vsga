@@ -24,8 +24,8 @@
 | :two:   | Create Data Guru  | :heavy_check_mark: |
 | :three: | Update Data Guru  | :x: |
 | :four:  | Delete Data Guru  | :x: |
-| :five:  | Read Data Murid   | :x: |
-| :six:   | Create Data Murid | :x: |
+| :five:  | Read Data Murid   | :heavy_check_mark: |
+| :six:   | Create Data Murid | :heavy_check_mark: |
 | :seven: | Update Data Murid | :x: |
 | :eight: | Delete Data Murid | :x: |
 | :nine:  | Assign Class      | :x: |
