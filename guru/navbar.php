@@ -19,6 +19,6 @@
       </ul>
     </div>
   </nav>
+  <?php require_once('../body.php'); ?>
 </body>
-<?php require_once('../body.php'); ?>
 </html>

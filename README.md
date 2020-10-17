@@ -22,7 +22,7 @@
 | :-----: | :---------------: | :----------------: |
 | :one:   | Read Data Guru    | :heavy_check_mark: |
 | :two:   | Create Data Guru  | :heavy_check_mark: |
-| :three: | Update Data Guru  | :x: |
+| :three: | Update Data Guru  | :heavy_check_mark: |
 | :four:  | Delete Data Guru  | :heavy_check_mark: |
 | :five:  | Read Data Murid   | :heavy_check_mark: |
 | :six:   | Create Data Murid | :heavy_check_mark: |

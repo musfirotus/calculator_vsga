@@ -1,5 +1,5 @@
 <?php
-require('../functions/delete.php');
+require_once('../functions/delete.php');
 
 $id = $_GET['id'];
 
