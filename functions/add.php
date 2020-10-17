@@ -6,9 +6,9 @@ function new_guru($data){
   global $db;
   global $result_guru;
 
-  $tnama_guru = $data["tnama_guru"];
-  $tgusername = $data["tgusername"];
-  $tgpassword = $data["tgpassword"];
+  $tnama_guru = htmlspecialchars($data["tnama_guru"]);
+  $tgusername = htmlspecialchars($data["tgusername"]);
+  $tgpassword = htmlspecialchars($data["tgpassword"]);
 
   foreach($result_guru as $dt) {
     if ($tgusername == $dt['username']) {
@@ -40,9 +40,9 @@ function new_murid($data){
   global $db;
   global $result_murid;
 
-  $tnama_murid = $data['tnama_murid'];
-  $tmusername = $data['tmusername'];
-  $tmpassword = $data['tmpassword'];
+  $tnama_murid = htmlspecialchars($data['tnama_murid']);
+  $tmusername = htmlspecialchars($data['tmusername']);
+  $tmpassword = htmlspecialchars($data['tmpassword']);
 
   foreach ($result_murid as $dt) {
     if ($tmusername == $dt['username']) {
