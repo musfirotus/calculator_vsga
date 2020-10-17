@@ -26,8 +26,6 @@
             <?php require_once('add_guru.php'); ?>
 
             <?php require_once('add_murid.php'); ?>
-
-            <?php require_once('update_murid.php'); ?>
         </div>
         <?php require_once('../body.php'); ?>
     </body>

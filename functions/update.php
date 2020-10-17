@@ -18,4 +18,22 @@ function update_guru($data) {
   mysqli_query($db, $update_tbguru);
   return mysqli_affected_rows($db);
 }
+
+function update_murid($data) {
+  global $db;
+
+  // htmlspecialchars untuk mencegah user mengirim data format html.
+  $idmurid = $data["id_murid"];
+  $iduser = $data["id_user"];
+  $upnama_murid = htmlspecialchars($data["upnama_murid"]);
+  $upmusername = htmlspecialchars($data["upmusername"]);
+  $upmpassword = htmlspecialchars($data["upmpassword"]);
+
+  $update_tbusermurid = "UPDATE `user` SET `username` = '$upmusername', `password` = '$upmpassword' WHERE `user`.`id_user` = $iduser";
+  mysqli_query($db, $update_tbusermurid);
+
+  $update_tbmurid = "UPDATE `murid` SET `nama_murid` = '$upnama_murid' WHERE `murid`.`id_murid` = $idmurid";
+  mysqli_query($db, $update_tbmurid);
+  return mysqli_affected_rows($db);
+}
 ?>

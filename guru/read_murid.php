@@ -22,19 +22,17 @@ require_once('../functions/add.php');
             </tr>
           </thead>
           <tbody>
-            <?php
-            $no = 1;
-            foreach ($result_murid as $data) {
-              echo "<tr>
-                <td>" . $no++ . "</td>
-                <td><a href='#update_murid' class='btn btn-warning' data-toggle='modal' onclick='murid_detail(" . $data["id_murid"] . ")'><i class='fas fa-edit'></i></a> | 
-                <a href='hapus.php?id=" . $data["id_user"] . "' class='btn btn-danger' onclick='return confirm(\"Yakin mau dihapus?\")'><i class='fas fa-trash-alt'></i></a></td>
-                <td>" . $data['nama_murid'] . "</td>
-                <td>" . $data['kelas'] . "</td>
-                <td>" . $data['username'] . "</td>
-              </tr>";
-            }
-            ?>
+            <?php $no = 1; ?>
+            <?php foreach ($result_murid as $data) { ?>
+              <tr>
+                <td><?= $no++; ?></td>
+                <td><a href='update_murid.php?id=<?= $data["id_murid"]; ?>' class='btn btn-warning'><i class='fas fa-edit'></i></a> | 
+                <a href='hapus.php?id=<?= $data["id_user"]; ?>' class='btn btn-danger' onclick='return confirm("Yakin mau dihapus?")'><i class='fas fa-trash-alt'></i></a></td>
+                <td><?= $data['nama_murid']; ?></td>
+                <td><?= $data['kelas']; ?></td>
+                <td><?= $data['username']; ?></td>
+              </tr>
+            <?php } ?>
           </tbody>
         </table>
       </div>

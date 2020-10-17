@@ -18,18 +18,18 @@
 - [ ] Logout
 
 ### Guru's Page
-| No.     | Features          | Checklist          |
-| :-----: | :---------------: | :----------------: |
-| :one:   | Read Data Guru    | :heavy_check_mark: |
-| :two:   | Create Data Guru  | :heavy_check_mark: |
-| :three: | Update Data Guru  | :heavy_check_mark: |
-| :four:  | Delete Data Guru  | :heavy_check_mark: |
-| :five:  | Read Data Murid   | :heavy_check_mark: |
-| :six:   | Create Data Murid | :heavy_check_mark: |
-| :seven: | Update Data Murid | :x: |
-| :eight: | Delete Data Murid | :heavy_check_mark: |
-| :nine:  | Assign Class      | :x: |
-| :ten:   | Profile           | :x: |
+| No.     | Features               | Checklist          |
+| :-----: | :--------------------: | :----------------: |
+| :one:   | Read Data Guru         | :heavy_check_mark: |
+| :two:   | Create Data Guru       | :heavy_check_mark: |
+| :three: | Update Data Guru       | :heavy_check_mark: |
+| :four:  | Delete Data Guru       | :heavy_check_mark: |
+| :five:  | Read Data Murid        | :heavy_check_mark: |
+| :six:   | Create Data Murid      | :heavy_check_mark: |
+| :seven: | Update Data Murid      | :heavy_check_mark: |
+| :eight: | Delete Data Murid      | :heavy_check_mark: |
+| :nine:  | Assign Class in Update | :x: |
+| :ten:   | Profile                | :x: |
 
 ### Murid's Page
 | No.     | Features                  | Checklist          |

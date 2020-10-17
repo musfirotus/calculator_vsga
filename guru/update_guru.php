@@ -54,8 +54,6 @@ if (isset($_POST["update_guru"])) {
               <?php foreach ($find_guru as $dt) { ?>
                 <input type="hidden" name="id_guru" value="<?= $dt['id_guru']; ?>">
                 <input type="hidden" name="id_user" value="<?= $dt['id_user']; ?>">
-                <?= var_dump($dt['id_guru']); ?>
-                <?= var_dump($dt['id_user']); ?>
                 <label for="upnama_guru">Nama Guru</label><br>
                 <input value="<?= $dt['nama_guru'] ?>" class="form-control" type="text" name="upnama_guru" id="upnama_guru" required><br>
                 <label for="ugusername">Username</label><br>
@@ -63,7 +61,7 @@ if (isset($_POST["update_guru"])) {
                 <label for="ugpassword">Password</label><br>
                 <input value="<?= $dt['password'] ?>" class="form-control" type="password" name="ugpassword" id="ugpassword" required><br>
                 <button type="submit" name="update_guru" class="btn btn-success"><i class="far fa-save"></i></button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i></button>
+                <a href="main.php" class="btn btn-danger"><i class="far fa-window-close"></i></a>
               <?php } ?>
             </form>
           </div>

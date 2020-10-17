@@ -26,7 +26,7 @@ require_once('../functions/add.php');
               <tr>
                 <td><?= $no++ ?></td>
                 <td><a href='update_guru.php?id=<?= $data['id_guru']; ?>' class='btn btn-warning'><i class='fas fa-edit'></i></a> | 
-                <a href='hapus.php?id=<?= $data["id_user"]; ?>' class='btn btn-danger' onclick='return confirm("Yakin mau dihapus?")';><i class='fas fa-trash-alt'></i></a></td>
+                <a href='hapus.php?id=<?= $data["id_user"]; ?>' class='btn btn-danger' onclick='return confirm("Yakin mau dihapus?")'><i class='fas fa-trash-alt'></i></a></td>
                 <td><?= $data['nama_guru'] ?></td>
                 <td><?= $data['username'] ?></td>
               </tr>
